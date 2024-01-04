@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
     <div id="flex">
@@ -35,9 +37,8 @@
       </div>
       <div class="product-item">
         <img id='product1' src="image-product-1-thumbnail.jpg">
-      </div>
-      <div class="product-item">
         <img id="product2" src="image-product-2-thumbnail.jpg">
+        <img id="product3" src="image-product-3-thumbnail.jpg">
       </div>
     </div>
     <div id='text-container'>
@@ -52,18 +53,47 @@
         <p>$250.00</p>
         <div id="group">
           <div id="grey">
-            <button><img src='icon-minus.svg'></button>
-            <p>0</p>
+            <button class="border" onclick="decrementCartItem()"><img src='icon-minus.svg'></button>
+            <span id="cart-item-count">0</span>
+            <button class="border" onclick="incrementCartItem()"><img src='icon-plus.svg'></button>
           </div>
-          <button id="orange"> Add to Cart</button>
+          <button id="orange" onclick="addToCart()">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.cartItemsCount = 0; // Define globally
+      window.cartItemCount = document.getElementById("cart-item-count");
+
+      function updateCartCount() {
+        window.cartItemCount.textContent = window.cartItemsCount;
+      }
+
+      window.incrementCartItem = function () {
+        window.cartItemsCount++;
+        updateCartCount();
+      }
+
+      window.decrementCartItem = function () {
+        if (window.cartItemsCount > 0) {
+          window.cartItemsCount--;
+          updateCartCount();
+        }
+      }
+
+      window.addToCart = function () {
+        window.incrementCartItem();
+        // You may add additional logic to handle the cart items, such as storing them in an array.
+      }
+    });
+  </script>
 </body>
+
 </html>
+

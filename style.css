@@ -40,30 +40,32 @@ a {
 
 #row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 20px;
 }
 
 #product-container {
     display: flex;
+    flex-direction: column;
+    margin-left:500px; /* Stack products vertically */
 }
 
 .product-item {
-    margin-right: 20px; /* Adjust margin to create space between products */
+    margin-bottom: 20px;
 }
-
-#product {
-    height: 400px;
-    border-radius: 8px;
+#product{
+    height:300px;
 }
-
-#product1 {
-    height: 100px;
-    border-radius: 8px;
+#product1{
+    border:solid 2px #FF7E1B;
 }
-
-#product2 {
-    height: 100px;
+#product2,#product1,#product3{
+    height:100px;
+}
+#product,
+#product1,
+#product2,#product3 {
+   
     border-radius: 8px;
 }
 
@@ -119,17 +121,26 @@ h4 {
 #grey {
     display: flex;
     border: none;
-    background-color: #979797;
+    background-color:;
     height: 20px;
     width: 20px;
+    align-items: center;
 }
 
 #group {
     display: flex;
     align-items: center;
+    gap: 100px;
+    
 }
 
 /* Optional: Center the content in #row2 */
 #row2 > * {
-    max-width: 600px; /* Adjust the max-width as needed */
+    max-width: 600px;
+    margin-left:100px; /* Adjust the max-width as needed */
+}
+
+.border {
+    border: none;
+    height: 20px;
 }
