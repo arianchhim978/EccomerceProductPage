@@ -23,12 +23,21 @@
         <li><a href=''>About</a></li>
         <li><a href=''>Contact</a></li>
       </ul>
-      <img id='market' src="icon-cart.svg">
+      <button onclick="showPressedDiv()" id="market"><img src='icon-cart.svg'></button>
       <img id='image' src="image-avatar.png">
     </div>
   </header>
 
   <div id="line"></div>
+  <div id="pressedDiv">
+    <h3 id="cart">Cart</h3>
+    <div id="line"></div>
+    <p id="empty">Your cart is empty</p>
+    <div id="cart-products">
+      <img src="image-product-1-thumbnail.jpg" alt="Product 1">
+      <p id="total-price">Total: $0.00</p>
+    </div>
+  </div>
 
   <div id='row'>
     <div id="product-container">
@@ -67,33 +76,68 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      window.cartItemsCount = 0; // Define globally
-      window.cartItemCount = document.getElementById("cart-item-count");
+    var pressedDiv = document.getElementById("pressedDiv");
+    var cartItemCount = 0;
+    var itemPrice = 125; // Assuming each item costs $125
 
-      function updateCartCount() {
-        window.cartItemCount.textContent = window.cartItemsCount;
-      }
+    function showPressedDiv() {
+      pressedDiv.style.display = 'block';
+      updateCartDisplay();
+    }
 
-      window.incrementCartItem = function () {
-        window.cartItemsCount++;
+    function updateCartDisplay() {
+      let emptyMessage = document.getElementById("empty");
+      emptyMessage.style.display = cartItemCount === 0 ? 'block' : 'none';
+      calculateTotalValue();
+      updateCartProducts();
+    }
+
+    function decrementCartItem() {
+      if (cartItemCount > 0) {
+        cartItemCount--;
         updateCartCount();
       }
+    }
 
-      window.decrementCartItem = function () {
-        if (window.cartItemsCount > 0) {
-          window.cartItemsCount--;
-          updateCartCount();
-        }
-      }
+    function incrementCartItem() {
+      cartItemCount++;
+      updateCartCount();
+    }
 
-      window.addToCart = function () {
-        window.incrementCartItem();
-        // You may add additional logic to handle the cart items, such as storing them in an array.
+    function updateCartCount() {
+      let cartCountElement = document.getElementById("cart-item-count");
+      cartCountElement.textContent = cartItemCount;
+      updateCartDisplay();
+    }
+    function addToCart() {
+  let totalValue = cartItemCount * itemPrice;
+  let totalValueElement = document.getElementById("total-price");
+  totalValueElement.textContent = `Total: $${totalValue.toFixed(2)}`;
+  console.log(`Added to cart: ${cartItemCount} items. Total value: $${totalValue}`);
+
+  // Display the selected product in the cart with specified size
+  let cartProductsElement = document.getElementById("cart-products");
+  cartProductsElement.innerHTML = `<img src="image-product-1-thumbnail.jpg" alt="Product 1" style="width: 50px; height: 50px;">`;
+}
+
+
+
+
+    function calculateTotalValue() {
+      let totalValue = cartItemCount * itemPrice;
+      let totalValueElement = document.getElementById("total-price");
+      totalValueElement.textContent = `Total: $${totalValue.toFixed(2)}`;
+    }
+
+    function updateCartProducts() {
+      let cartProductsElement = document.getElementById("cart-products");
+      if (cartItemCount > 0) {
+        cartProductsElement.style.display = 'block';
+      } else {
+        cartProductsElement.style.display = 'none';
       }
-    });
+    }
   </script>
 </body>
 
 </html>
-
